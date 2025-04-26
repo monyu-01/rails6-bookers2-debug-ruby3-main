@@ -31,4 +31,17 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+
+  def self.search_for(word, how)
+    case how
+    when 'perfect'
+      where(name: word)
+    when 'forward'
+      where('name LIKE ?', "#{word}%")
+    when 'backward'
+      where('name LIKE ?', "%#{word}")
+    when 'partial'
+      where('name LIKE ?', "%#{word}%")
+    end
+  end
 end
