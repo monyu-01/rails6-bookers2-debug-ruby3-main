@@ -56,15 +56,3 @@
   </nav>
 </header>
 
-<% if user_signed_in? %>
-  <div class="search-form" style="margin-top: 10px; text-align: center;">
-    <%= form_with url: search_path, method: :get, local: true do %>
-      <div>
-        <%= text_field_tag :word, params[:word] %>
-        <%= select_tag :range, options_for_select(["User", "Book"])%>
-        <%= select_tag :how, options_for_select([["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]]) %>
-        <%= submit_tag "検索" %>
-      </div>
-    <% end %>
-  </div>
-<% end %>

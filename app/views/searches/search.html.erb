@@ -1,50 +1,11 @@
-<h2><%= @range == "User" ? "Users" : "Books" %> search for "<%= @word %>"</h2>
-<% if @range == "User" && @users.present? %>
-    <table class="table table-hover">  
-      <thead>
-       <tr>
-         <th></th>
-         <th>Name</th>
-       </tr>
-      </thead>
-      <tbody>
-       <% @users.each do |user| %>
-         <tr>
-           <td>
-             <%= link_to user_path(user) do %>
-               <%= image_tag user.get_profile_image, size:'50x50' %>
-             <% end %>
-           </td>
-           <td><%= link_to user.name, user_path(user) %></td>
-         </tr>
-       <% end %>
-      </tbody>
-    </table>
-  
-<% elsif @range == "Book" && @books.present? %>
-  <table class='table table-hover'>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @books.each do |book| %>
-        <tr>
-          <td>
-            <%= link_to(book.user) do %>
-              <%= image_tag book.user.get_profile_image, size: '50x50' %>
-            <% end %>
-          </td>
-          <td><%= link_to book.title, book_path(book) %></td>
-          <td><%= book.body %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% else %>
-   <p>一致する結果が見つかりませんでした。</p>
+<% if @range == 'User' %>
+  <h3>Users search for "<%= @word %>"</h3>
+  <%= render 'users/index', users: @users%>
+<% elsif @range == 'Book' %>
+  <h3>Books search for "<%= @word %>"</h3>
+  <%= render 'books/index', books: @books %>
 <% end %>
+
+
+
+
