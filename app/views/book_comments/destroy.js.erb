@@ -1,0 +1,1 @@
+$("#comment-list-<%= @book.id %>").html("<%= j(render partial: 'book_comments/index', locals: { book: @book }) %>");
