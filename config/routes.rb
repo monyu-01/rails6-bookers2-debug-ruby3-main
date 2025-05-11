@@ -7,19 +7,19 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
 
-  resources :relationships, only: [:create, :destroy]
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
   end
 
-  resources :users do
+  resources :users, only: [:index,:show,:edit,:update]do
+    resources :relationships, only: [:create, :destroy]
     member do
       get :followings, :followers
+      get :daily_posts
     end
   end
 
-  resources :users, only: [:index,:show,:edit,:update]
   resources :notifications, only: [:update]
  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

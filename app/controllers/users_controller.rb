@@ -38,6 +38,12 @@ class UsersController < ApplicationController
     @followers = @user.followers
   end
 
+  def daily_posts
+    user = User.find(params[:id])
+    @books = user.books.where(created_at: params[:created_at].to_date.all_day)
+    render :daily_posts
+  end
+
   private
 
   def user_params
